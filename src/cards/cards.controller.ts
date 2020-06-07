@@ -14,6 +14,11 @@ export default class CardsController {
     return this.cardsService.getCardById(Number(id));
   }
 
+  @Get()
+  getCardsForLearningSession() {
+    return this.cardsService.getCardsForLearningSession();
+  }
+
   @Post()
   async createCard(@Body() card: CreateCardDto) {
     return this.cardsService.createCard(card);
