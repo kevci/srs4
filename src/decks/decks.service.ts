@@ -5,6 +5,4 @@ import UpdateDeckDto from './dto/updateDeck.dto';
 @Injectable()
 export default class DecksService {
   
-
-  
 }

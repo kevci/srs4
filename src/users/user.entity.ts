@@ -13,9 +13,9 @@ export class User {
   @OneToMany(type => Card, card => card.user)
   cards: Card[];
 
-  @Column('text')
+  @Column({ unique: true })
   name: string;
 
-  @Column('text')
+  @Column()
   password: string;
 }

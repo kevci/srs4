@@ -19,7 +19,7 @@ export class Card {
   @Column('back')
   back: string;
 
-  @Column('float')
+  @Column({ type: 'float', default: 2.5 })
   e_factor: number;
 
   @Column('date')
