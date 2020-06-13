@@ -17,7 +17,7 @@ export default class UsersService {
     if (user) {
       return user;
     }
-    throw new HttpException('The User with this name does not seem to exist', HttpStatus.NOT_FOUND);
+    throw new HttpException('The User with this email does not seem to exist', HttpStatus.NOT_FOUND);
   }
 
   async getById(id: number) {
