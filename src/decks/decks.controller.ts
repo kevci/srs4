@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, Patch } from '@nestjs/common';
 import DecksService from './decks.service';
 import CreateDeckDto from './dto/createDeck.dto';
-import UpdateDeckDto from './dto/updateDeck.dto';
+import UpdateDeckDto from './dto/updateDeckName.dto';
 
 @Controller('decks')
 export default class DecksController {
@@ -21,7 +21,7 @@ export default class DecksController {
 
   @Patch(':id')
   async updateDeck(@Param('id') id: string, @Body() deck: UpdateDeckDto) {
-    return this.decksService.updateDeck(Number(id), deck);
+    return this.decksService.updateDeckName(Number(id), deck);
   }
 
   @Delete(':id')

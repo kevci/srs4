@@ -2,17 +2,13 @@ import { Body, Controller, Delete, Get, Param, Post, Put, Patch } from '@nestjs/
 import CardsService from './cards.service';
 import CreateCardDto from './dto/createCard.dto';
 import UpdateCardDto from './dto/updateCard.dto';
+import HandleCardAnswerDto from './dto/handleCardAnswer.dto';
 
 @Controller('cards')
 export default class CardsController {
   constructor(
     private readonly cardsService: CardsService
   ) {}
-
-  @Get(':id')
-  getCardById(@Param('id') id: string) {
-    return this.cardsService.getCardById(Number(id));
-  }
 
   @Get()
   getCardsForLearningSession() {
@@ -24,9 +20,14 @@ export default class CardsController {
     return this.cardsService.createCard(card);
   }
 
-  @Patch(':id')
+  @Patch(':id') //this might make more sense as a PUT
   async updateCard(@Param('id') id: string, @Body() card: UpdateCardDto) {
     return this.cardsService.updateCard(Number(id), card);
+  }
+
+  @Patch(':id')
+  async handleCardAnswer(@Param('id') id: string, @Body() answer: HandleCardAnswerDto) {
+    return this.cardsService.handleCardAnswer(Number(id), answer);
   }
 
   @Delete(':id')
