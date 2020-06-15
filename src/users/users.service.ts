@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
@@ -12,7 +12,7 @@ export default class UsersService {
     private readonly usersRepository: Repository<User>,
   ) {}
 
-  async getByEmail(email: string) {
+  async getUserByEmail(email: string) {
     const user = await this.usersRepository.findOne({ email });
     if (user) {
       return user;
@@ -20,7 +20,7 @@ export default class UsersService {
     throw new HttpException('The User with this email does not seem to exist', HttpStatus.NOT_FOUND);
   }
 
-  async getById(id: number) {
+  async getUserById(id: number) {
     const user = await this.usersRepository.findOne({ id });
     if (user) {
       return user;
@@ -28,10 +28,17 @@ export default class UsersService {
     throw new HttpException('The User with this id does not seem to exist', HttpStatus.NOT_FOUND);
   }
 
-  async create(userData: CreateUserDto) {
+  async createUser(userData: CreateUserDto) {
     const newUser = await this.usersRepository.create(userData);
     await this.usersRepository.save(newUser);
     return newUser;
+  }
+
+  async deleteUser(id: number) {
+    const response = await this.usersRepository.delete(id);
+    if (!response.affected) {
+      throw new NotFoundException(id);
+    }
   }
  
 }

@@ -17,8 +17,7 @@ export default class DecksService {
     const deck = await this.decksRepository.findOne(id);
     if (deck) {
       return deck;
-    }
-    throw new NotFoundException(id);
+    } else throw new NotFoundException(id);
   }
 
   async createDeck(deck: CreateDeckDto) {
@@ -32,8 +31,7 @@ export default class DecksService {
     const updatedDeck = await this.decksRepository.findOne(id);
     if (updatedDeck) {
       return updatedDeck
-    }
-    throw new NotFoundException(id);
+    } else throw new NotFoundException(id);
   }
 
   async deleteDeck(id: number) {

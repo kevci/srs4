@@ -8,6 +8,11 @@ export default class UsersController {
     private readonly usersService: UsersService
   ) {}
 
+  @Get(':email')
+  getUserByEmail(@Param('email') email: string) {
+    return this.usersService.getUserByEmail(email);
+  }
+
   @Get(':id')
   getUserById(@Param('id') id: string) {
     return this.usersService.getUserById(Number(id));
