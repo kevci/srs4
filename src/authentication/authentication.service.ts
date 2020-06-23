@@ -19,7 +19,7 @@ export class AuthenticationService {
   public async register(registrationData: RegisterDto) {
     const hashedPassword = await bcrypt.hash(registrationData.password, 10);
     try {
-      const createdUser = await this.usersService.create({
+      const createdUser = await this.usersService.createUser({
         ...registrationData,
         password: hashedPassword
       });
@@ -45,7 +45,7 @@ export class AuthenticationService {
 
   public async getAuthenticatedUser(email: string, plainTextPassword: string) {
     try {
-      const user = await this.usersService.getByEmail(email);
+      const user = await this.usersService.getUserByEmail(email);
       await this.verifyPassword(plainTextPassword, user.password);
       return user;
     } catch (error) {

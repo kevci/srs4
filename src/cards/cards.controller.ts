@@ -20,7 +20,7 @@ export default class CardsController {
     return this.cardsService.createCard(card);
   }
 
-  @Patch(':id') //this might make more sense as a PUT
+  @Put(':id') //this might make more sense as a PUT
   async updateCard(@Param('id') id: string, @Body() card: UpdateCardDto) {
     return this.cardsService.updateCard(Number(id), card);
   }
